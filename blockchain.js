@@ -27,7 +27,7 @@ class Blockchain {
 
   // method to hash a block
   hashBlock(block) {
-    // converting each field into a a string
+    // converting each field into a string
     const strBlock =
       block.blockNumber +
       block.previousHash +
