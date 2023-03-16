@@ -24,4 +24,19 @@ class Blockchain {
     this.chain.push(block);
     return block;
   }
+
+  // method to hash a block
+  hashBlock(block) {
+    // converting each field into a a string
+    const strBlock =
+      block.blockNumber +
+      block.previousHash +
+      JSON.stringify(block.data) +
+      block.timestamp.toString() +
+      block.nonce;
+
+    // feed the hashing function the block as a string to get the SHA256 hash in hex.
+    const hash = crypto.createHash("sha256").update(strBlock).digest("hex");
+    return hash;
+  }
 }
