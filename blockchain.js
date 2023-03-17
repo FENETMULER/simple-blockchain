@@ -39,4 +39,9 @@ class Blockchain {
     const hash = crypto.createHash("sha256").update(strBlock).digest("hex");
     return hash;
   }
+
+  // method to return the last block in the chain
+  getLatestBlock() {
+    return this.chain[this.chain.length - 1];
+  }
 }
