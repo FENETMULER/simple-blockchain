@@ -55,10 +55,12 @@ class Blockchain {
     let blockIndex = 1;
     while (blockIndex < this.chain.length) {
       const currentBlock = this.chain[blockIndex];
+      // check if the previous hash field of the current block matches the hash of the previous block
       if (currentBlock["previousHash"] !== previousBlock.hash) {
         return false;
       }
       const currentBlockHash = this.hashBlock(currentBlock);
+      // check if block has 4 leading 0s (add more zeroes to increase mining difficulty)
       if (currentBlockHash.slice(0, 4) !== "0000") {
         return false;
       }
