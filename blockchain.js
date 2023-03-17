@@ -48,4 +48,23 @@ class Blockchain {
   getAllBlocks() {
     return this.chain;
   }
+
+  // method to validate chain
+  checkValidity() {
+    let previousBlock = this.chain[0];
+    let blockIndex = 1;
+    while (blockIndex < this.chain.length) {
+      const currentBlock = this.chain[blockIndex];
+      if (currentBlock["previousHash"] !== previousBlock.hash) {
+        return false;
+      }
+      const currentBlockHash = this.hashBlock(currentBlock);
+      if (currentBlockHash.slice(0, 4) !== "0000") {
+        return false;
+      }
+      previousBlock = currentBlock;
+      blockIndex++;
+    }
+    return true;
+  }
 }
