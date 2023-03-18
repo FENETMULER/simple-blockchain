@@ -74,4 +74,33 @@ class Blockchain {
   millisecondsToSeconds(milliseconds) {
     return Math.floor(milliseconds / 1000);
   }
+
+  // method to find nonce and timestamp that satisfy the proof of work
+  proofOfWork(previousHash, data) {
+    let nonce = 0;
+    let validHash = false;
+    let timestamp = this.millisecondsToSeconds(Date.now());
+    while (!validHash) {
+      const currentFields = {
+        blockNumber: this.chain.length + 1,
+        previousHash,
+        data,
+        timestamp: timestamp.toString(),
+        nonce,
+      };
+      const hash = this.hashBlock(currentFields);
+      if (hash.slice(0, 4) === "0000") {
+        validHash = true;
+      } else {
+        const now = this.millisecondsToSeconds(Date.now());
+        if (timestamp !== now) {
+          nonce = 0;
+          timestamp = now;
+          continue;
+        }
+        nonce++;
+      }
+    }
+    return { nonce, timestamp };
+  }
 }
