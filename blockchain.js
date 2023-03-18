@@ -82,6 +82,7 @@ class Blockchain {
     let timestamp = this.millisecondsToSeconds(Date.now());
     while (!validHash) {
       const currentFields = {
+        // current candidate block
         blockNumber: this.chain.length + 1,
         previousHash,
         data,
@@ -90,10 +91,12 @@ class Blockchain {
       };
       const hash = this.hashBlock(currentFields);
       if (hash.slice(0, 4) === "0000") {
+        // find hash that satisfies a '4 leading zeroes' difficulty
         validHash = true;
       } else {
         const now = this.millisecondsToSeconds(Date.now());
         if (timestamp !== now) {
+          // if time has progressed in seconds since timestamp was saved, reset nonce.
           nonce = 0;
           timestamp = now;
           continue;
