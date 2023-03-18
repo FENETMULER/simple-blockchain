@@ -69,4 +69,9 @@ class Blockchain {
     }
     return true;
   }
+
+  // method to convert milliseconds to seconds
+  millisecondsToSeconds(milliseconds) {
+    return Math.floor(milliseconds / 1000);
+  }
 }
