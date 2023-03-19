@@ -128,3 +128,8 @@ app.listen(3000, () => {
 });
 
 app.use(express.json());
+
+app.post("/mine-block", (req, res) => {
+  const data = req.body;
+  res.json(mineBlock(data)).status(200);
+});
