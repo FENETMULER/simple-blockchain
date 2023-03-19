@@ -107,3 +107,18 @@ class Blockchain {
     return { nonce, timestamp };
   }
 }
+
+const blockchain = new Blockchain();
+
+function mineBlock(data) {
+  // function to mine a block given the data
+  const lastBlock = blockchain.getLatestBlock();
+  const { nonce, timestamp } = blockchain.proofOfWork(lastBlock.hash, data);
+  const newBlock = blockchain.createBlock(
+    nonce,
+    timestamp,
+    data,
+    lastBlock.hash
+  );
+  return newBlock;
+}
