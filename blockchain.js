@@ -122,3 +122,9 @@ function mineBlock(data) {
   );
   return newBlock;
 }
+
+app.listen(3000, () => {
+  console.log("Blockchain initialized!");
+});
+
+app.use(express.json());
