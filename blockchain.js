@@ -133,3 +133,8 @@ app.post("/mine-block", (req, res) => {
   const data = req.body;
   res.json(mineBlock(data)).status(200);
 });
+
+app.get("/blockchain", (req, res) => {
+  // route to get all blocks
+  res.json(blockchain.getAllBlocks()).status(200);
+});
