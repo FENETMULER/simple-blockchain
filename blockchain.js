@@ -138,3 +138,12 @@ app.get("/blockchain", (req, res) => {
   // route to get all blocks
   res.json(blockchain.getAllBlocks()).status(200);
 });
+
+app.get("/check-validity", (req, res) => {
+  const result = blockchain.checkValidity();
+  if (result) {
+    res.json({ message: "The Blockchain is VALID!" }).status(200);
+  } else {
+    res.json({ message: "The Blockchain is INVALID!" }).status(200);
+  }
+});
